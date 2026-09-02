@@ -2,193 +2,346 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#fff7d6">
-<title>음식탐험 수학놀이터 V1</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#fff4b8">
+<title>음식탐험 수학놀이터 V2</title>
 <style>
-:root{--ink:#202124;--muted:#6b7280;--paper:#fffdf7;--card:#fff;--line:#e7e2d5;--accent:#ffbf3f;--accent2:#74b9ff;--ok:#4caf50;--bad:#ef5350;--shadow:0 8px 24px rgba(40,30,10,.09)}
-*{box-sizing:border-box} body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;color:var(--ink);background:linear-gradient(#fffdf8,#f8fbff);min-height:100vh}
-button,input{font:inherit} button{border:0;cursor:pointer}
-.app{max-width:980px;margin:auto;padding:18px 18px 90px}
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
-.brand{font-size:28px;font-weight:900}.small{color:var(--muted);font-size:14px}
-.iconbtn{width:52px;height:52px;border:2px solid #444;border-radius:18px;background:#fff;font-size:25px}
-.hero{background:linear-gradient(135deg,#fff3bd,#e8f5ff);border:1px solid var(--line);border-radius:30px;padding:26px;box-shadow:var(--shadow)}
-.hero h1{font-size:38px;margin:0 0 8px}.hero p{font-size:20px;line-height:1.5;margin:0;color:#4b5563}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:20px;box-shadow:var(--shadow)}
-.bigbtn{min-height:120px;text-align:left;background:#fff;border:2px solid #eee2bd;border-radius:24px;padding:18px}.bigbtn .emoji{font-size:44px}.bigbtn strong{display:block;font-size:22px;margin-top:8px}.bigbtn span{display:block;color:var(--muted);margin-top:5px}
-.section-title{display:flex;justify-content:space-between;align-items:center;margin:26px 2px 10px}.section-title h2{margin:0;font-size:25px}
-.progress{height:12px;background:#eee;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:var(--accent);width:0}
-.foodgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.food{position:relative;min-height:145px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:12px;text-align:center}.food .pic{height:82px;display:flex;align-items:center;justify-content:center;font-size:54px}.food img{max-width:100%;max-height:82px;border-radius:14px}.lock{filter:grayscale(1);opacity:.35}.tag{display:inline-block;background:#f4f1e8;border-radius:99px;padding:4px 9px;font-size:12px;margin-top:5px}
-.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-top:1px solid var(--line);z-index:10}.navin{max-width:980px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr)}.nav button{padding:12px 4px;background:transparent;font-size:13px}.nav button b{display:block;font-size:22px}
+*{box-sizing:border-box}
+:root{--ink:#202124;--muted:#68707b;--paper:#fffdf8;--card:#fff;--line:#e6dfcf;--yellow:#ffe477;--blue:#dff0ff;--green:#ddf5df;--red:#ffe2df;--shadow:0 5px 18px rgba(40,30,10,.08)}
+html,body{margin:0;min-height:100%;background:linear-gradient(#fffdf8,#f5f9ff);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+body{font-size:18px}button,input,textarea{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.app{max-width:1000px;margin:auto;padding:14px 14px 90px}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.brand{font-size:28px;font-weight:950}.small{font-size:14px;color:var(--muted)}
+.icon{width:52px;height:52px;border:2px solid #555;border-radius:18px;background:#fff;font-size:24px}
 .screen{display:none}.screen.active{display:block}
-.choicegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}.choice{min-height:100px;border:2px solid #e9e2d0;border-radius:22px;background:#fff;font-size:25px;font-weight:800}.choice:hover{transform:translateY(-1px)}
-.objects{display:flex;flex-wrap:wrap;gap:10px;min-height:100px;align-items:center;justify-content:center;padding:18px;background:#fff;border-radius:22px;border:1px dashed #ddd}.obj{font-size:42px;animation:pop .2s ease}.bundle{display:flex;flex-direction:column;align-items:center;background:#fff4b9;border:2px solid #f1c94b;border-radius:18px;padding:8px}.bundle .mini{font-size:21px;line-height:1.05;max-width:120px;text-align:center}
-@keyframes pop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
-.message{padding:14px 16px;border-radius:18px;margin-top:14px;background:#f4f8ff}.message.ok{background:#eaf8ec}.message.bad{background:#fff0ef}
-.action{background:#202124;color:#fff;border-radius:18px;padding:13px 18px;font-weight:800}.secondary{background:#f2efe6;color:#333;border-radius:18px;padding:13px 18px;font-weight:800}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-input[type=text],input[type=number],input[type=password]{width:100%;padding:14px 15px;border:2px solid #ddd5c4;border-radius:16px;background:#fff}
-label{display:block;font-weight:800;margin:12px 0 7px}.modal{position:fixed;inset:0;background:rgba(0,0,0,.42);display:none;align-items:flex-end;justify-content:center;z-index:30}.modal.show{display:flex}.sheet{background:#fff;border-radius:28px 28px 0 0;width:min(700px,100%);max-height:92vh;overflow:auto;padding:22px}
-canvas{width:100%;height:260px;border:2px dashed #ccc;border-radius:18px;background:#fff;touch-action:none}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:#f8f6ef;border-radius:18px;padding:15px;text-align:center}.stat b{display:block;font-size:28px}
-@media(min-width:720px){.foodgrid{grid-template-columns:repeat(5,1fr)}.choicegrid{grid-template-columns:repeat(4,1fr)}}
+.hero{border:1px solid var(--line);border-radius:30px;padding:25px;background:linear-gradient(135deg,#fff2af,#e8f5ff);box-shadow:var(--shadow)}
+.hero h1{font-size:38px;line-height:1.18;margin:0 0 10px}.hero p{margin:0;line-height:1.55;font-size:20px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px}
+.big{background:#fff;border:2px solid #eee5ca;border-radius:24px;min-height:125px;padding:18px;text-align:left;box-shadow:var(--shadow)}
+.big .e{font-size:42px}.big strong{display:block;font-size:22px;margin-top:7px}.big span{display:block;color:var(--muted);font-size:15px;margin-top:4px}
+.section{display:flex;justify-content:space-between;align-items:center;margin:24px 2px 10px}.section h2{margin:0;font-size:25px}
+.card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:var(--shadow)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:#f8f5ec;border-radius:18px;padding:13px;text-align:center}.stat b{font-size:28px;display:block}
+.action{background:#202124;color:#fff;border-radius:16px;padding:13px 17px;font-weight:850}.secondary{background:#f0eee8;color:#222;border-radius:16px;padding:13px 17px;font-weight:850}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.row>*{flex:0 0 auto}
+.nav{position:fixed;z-index:20;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid #ddd}.navin{max-width:1000px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr)}.nav button{background:transparent;border:0;padding:10px 3px;font-size:13px}.nav button b{display:block;font-size:23px}
+.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#f0eee7;font-size:13px}
+.board{background:#fff9df;border:3px solid #e8d79a;border-radius:20px;padding:9px;margin:13px auto;max-width:720px}
+.grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.cell{min-height:54px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:34px;position:relative}
+.cell.filled{background:#fffef7}.cell.selected{outline:4px solid #74aaf7;transform:scale(1.03);z-index:2}.cell.disabled{opacity:.28}
+.instructions{background:#f5f8ff;border-radius:17px;padding:14px;line-height:1.55;margin:12px 0}.success{background:var(--green);border-radius:18px;padding:15px;line-height:1.5}.retry{background:#fff3c4;border-radius:18px;padding:15px;line-height:1.5}.error{background:var(--red);border-radius:18px;padding:15px;line-height:1.5}
+.answerGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:15px}.answer{min-height:70px;border:3px solid #e5e1d7;border-radius:18px;background:#fff;font-size:28px;font-weight:900}.answer.selected{border-color:#5d94e8;background:#eaf3ff;box-shadow:0 0 0 3px #cfe2ff inset}.answer.correct{border-color:#54a55d;background:#eaf8eb}.answer.wrong{border-color:#e07b72;background:#fff0ee}
+.foodgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.foodcard{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden}.foodpic{height:155px;background:#f4f4f2;display:flex;align-items:center;justify-content:center;font-size:65px}.foodpic img{width:100%;height:100%;object-fit:cover}.foodct{padding:12px}.foodname{font-size:20px;font-weight:900}.fooddesc{font-size:14px;line-height:1.55;color:#555;margin-top:6px}.locked{filter:grayscale(1);opacity:.38}
+.filters{display:flex;gap:8px;overflow:auto;padding-bottom:8px}.chip{white-space:nowrap;border:0;border-radius:999px;background:#eee;padding:9px 13px}.chip.on{background:#202124;color:#fff}
+.modal{position:fixed;z-index:50;inset:0;background:rgba(0,0,0,.42);display:none;align-items:flex-end;justify-content:center}.modal.show{display:flex}.sheet{width:min(760px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:28px 28px 0 0;padding:22px}.field{margin:12px 0}.field label{display:block;font-weight:850;font-size:15px;margin-bottom:6px}.field input,.field textarea{width:100%;padding:13px;border:2px solid #ddd6c7;border-radius:14px;background:#fff}.field textarea{min-height:90px}
+canvas{width:100%;height:240px;border:2px dashed #cfc9bc;border-radius:18px;background:#fff;touch-action:none}
+@media(min-width:720px){.foodgrid{grid-template-columns:repeat(4,1fr)}.modal{align-items:center}.sheet{border-radius:26px}.grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:460px){.hero h1{font-size:31px}.brand{font-size:23px}.grid{grid-template-columns:1fr}.answerGrid{grid-template-columns:repeat(2,1fr)}.cell{min-height:48px;font-size:29px}}
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="top"><div><div class="brand">🍴 음식탐험 수학놀이터</div><div class="small" id="hello"></div></div><button class="iconbtn" onclick="openParent()">⚙️</button></div>
+<header>
+  <div><div class="brand">🍴 음식탐험 수학놀이터</div><div id="hello" class="small"></div></div>
+  <button class="icon" onclick="parentGate()">👨‍👩‍👧</button>
+</header>
 
-  <section id="home" class="screen active">
-    <div class="hero">
-      <h1>오늘은 어떤 음식을<br>발견할까요? 🎁</h1>
-      <p>수학을 풀면 새로운 음식이 열리고,<br>사진을 찍거나 직접 그려서 나만의 도감을 만들어요.</p>
-    </div>
-    <div class="grid">
-      <button class="bigbtn" onclick="startExplore()"><div class="emoji">🔎</div><strong>음식 탐험</strong><span>음식을 찾고 수량을 세어봐요</span></button>
-      <button class="bigbtn" onclick="startMath()"><div class="emoji">🧠</div><strong>수학 놀이터</strong><span>10 만들기 · 덧셈 · 뺄셈</span></button>
-      <button class="bigbtn" onclick="show('collection')"><div class="emoji">📕</div><strong>나의 음식도감</strong><span id="collectionCount"></span></button>
-      <button class="bigbtn" onclick="newFoodModal()"><div class="emoji">📸</div><strong>새 음식 발견</strong><span>내 사진·그림으로 직접 등록</span></button>
-    </div>
-    <div class="section-title"><h2>오늘의 탐험 기록</h2></div>
-    <div class="card"><div class="stats"><div class="stat"><b id="stars">0</b>⭐<br>별</div><div class="stat"><b id="solved">0</b>개<br>문제</div><div class="stat"><b id="foods">0</b>개<br>획득</div></div></div>
-  </section>
+<section id="home" class="screen active">
+  <div class="hero">
+    <h1>오늘은 어떤 음식을<br>발견할까요? 🎁</h1>
+    <p>음식을 찾아 모으고, 직접 세어 보고, 수학 미션을 해결하면 새로운 음식이 열려요.</p>
+  </div>
+  <div class="grid">
+    <button class="big" onclick="exploreStart()"><div class="e">🔎</div><strong>음식 탐험</strong><span>해당 음식만 골라 모은 뒤 직접 세어봐요</span></button>
+    <button class="big" onclick="mathStart()"><div class="e">🧠</div><strong>수학 놀이터</strong><span>10 만들기 · 덧셈 · 뺄셈 · 묶음</span></button>
+    <button class="big" onclick="show('collection');renderCollection()"><div class="e">📕</div><strong>나의 음식도감</strong><span id="countText">0개의 음식</span></button>
+    <button class="big" onclick="newFood()"><div class="e">📸</div><strong>새 음식 발견</strong><span>사진을 찍거나 직접 그려 등록해요</span></button>
+  </div>
+  <div class="section"><h2>오늘의 기록</h2></div>
+  <div class="card"><div class="stats"><div class="stat"><b id="stars">0</b>⭐<br>별</div><div class="stat"><b id="solved">0</b>개<br>문제</div><div class="stat"><b id="earned">0</b>개<br>획득</div></div></div>
+</section>
 
-  <section id="explore" class="screen">
-    <div class="section-title"><h2>🔎 음식 탐험</h2><button class="secondary" onclick="show('home')">나가기</button></div>
-    <div class="card"><h2 id="exploreQ"></h2><div id="exploreObjects" class="objects"></div><div id="exploreChoices" class="choicegrid"></div><div id="exploreMsg"></div></div>
-  </section>
+<section id="explore" class="screen">
+  <div class="section"><h2>🔎 음식 탐험</h2><button class="secondary" onclick="show('home')">나가기</button></div>
+  <div class="card">
+    <div id="exploreTitle"></div>
+    <div id="exploreBoard" class="board"></div>
+    <div class="instructions">👆 <b>찾아야 할 음식만</b> 눌러서 아래의 바구니에 모아 주세요.<br>처음에는 몇 개인지 알려주지 않아요. <b>모은 다음 직접 세어 보는 것</b>이 목표예요.</div>
+    <div id="basketBoard" class="board"></div>
+    <div id="exploreAnswers"></div>
+    <div id="exploreMsg"></div>
+  </div>
+</section>
 
-  <section id="math" class="screen">
-    <div class="section-title"><h2>🧠 수학 놀이터</h2><button class="secondary" onclick="show('home')">나가기</button></div>
-    <div class="card">
-      <div class="small" id="mathStage"></div><div class="progress" style="margin:8px 0 18px"><i id="mathProgress"></i></div>
-      <h1 id="mathQ" style="font-size:36px"></h1>
-      <div id="mathVisual" class="objects"></div>
-      <div id="mathChoices" class="choicegrid"></div>
-      <div id="mathMsg"></div>
-    </div>
-  </section>
+<section id="math" class="screen">
+  <div class="section"><h2>🧠 수학 놀이터</h2><button class="secondary" onclick="show('home')">나가기</button></div>
+  <div class="card">
+    <div id="stageLabel" class="pill"></div>
+    <h1 id="mathQuestion" style="font-size:35px;text-align:center;margin:16px 0"></h1>
+    <div id="mathBoard" class="board"></div>
+    <div id="mathGuide" class="instructions"></div>
+    <div id="mathAnswers" class="answerGrid"></div>
+    <div id="mathMsg"></div>
+  </div>
+</section>
 
-  <section id="collection" class="screen">
-    <div class="section-title"><h2>📕 나의 음식도감</h2><button class="secondary" onclick="newFoodModal()">➕ 새 음식</button></div>
-    <div class="card"><p>수학으로 얻은 음식과 내가 직접 발견한 음식이 차곡차곡 쌓여요.</p><div id="foodGrid" class="foodgrid"></div></div>
-  </section>
+<section id="collection" class="screen">
+  <div class="section"><h2>📕 나의 음식도감</h2><button class="action" onclick="newFood()">➕ 새 음식</button></div>
+  <div class="card">
+    <p>수학으로 발견한 음식과 내가 직접 등록한 음식이 차곡차곡 쌓여요.</p>
+    <div id="foodFilters" class="filters"></div>
+    <div id="foodGrid" class="foodgrid"></div>
+  </div>
+</section>
 
-  <section id="parent" class="screen">
-    <div class="section-title"><h2>👨‍👩‍👧 부모님 모드</h2><button class="secondary" onclick="show('home')">닫기</button></div>
-    <div class="card">
-      <h2>학습 현황</h2><div class="stats"><div class="stat"><b id="pSolved">0</b>문제</div><div class="stat"><b id="pCorrect">0</b>정답</div><div class="stat"><b id="pAccuracy">0%</b>정확도</div></div>
-      <h3>개념별 경험</h3><div id="skills"></div>
-      <h3>안전관리</h3><div class="row"><button class="action" onclick="backup()">📦 전체 백업</button><label class="secondary" style="display:inline-block;cursor:pointer">📥 복원<input id="restore" type="file" accept=".json" style="display:none" onchange="restore(event)"></label></div>
-      <p class="small">백업에는 음식 정보, 학습 기록, 아이가 등록한 사진/그림이 함께 포함됩니다.</p>
-      <hr><h3>아이 이름</h3><div class="row"><input id="childName" type="text" placeholder="이름을 입력하세요"><button class="action" onclick="saveName()">저장</button></div>
-    </div>
-  </section>
+<section id="parent" class="screen">
+  <div class="section"><h2>👨‍👩‍👧 부모님 모드</h2><button class="secondary" onclick="show('home')">닫기</button></div>
+  <div class="card">
+    <h2>학습 현황</h2><div class="stats"><div class="stat"><b id="pSolved">0</b>문제</div><div class="stat"><b id="pCorrect">0</b>정답</div><div class="stat"><b id="pAcc">0%</b>정확도</div></div>
+    <h3>개념별 경험</h3><div id="skills"></div>
+    <h3>데이터 안전관리</h3>
+    <div class="row"><button class="action" onclick="backup()">📦 전체 백업</button><label class="secondary" style="cursor:pointer">📥 복원<input id="restoreFile" type="file" accept=".json" style="display:none" onchange="restore(event)"></label></div>
+    <p class="small">백업에는 음식도감, 사진/그림, 학습 기록이 함께 포함됩니다.</p>
+    <hr>
+    <h3>아이 이름</h3><div class="row" style="align-items:stretch"><input id="nameInput" style="flex:1;min-width:180px" placeholder="이름을 입력하세요"><button class="action" onclick="saveName()">저장</button></div>
+  </div>
+</section>
 </div>
 
 <div class="nav"><div class="navin">
 <button onclick="show('home')"><b>🏠</b>홈</button>
-<button onclick="show('explore')"><b>🔎</b>탐험</button>
-<button onclick="show('math')"><b>🧠</b>수학</button>
-<button onclick="show('collection')"><b>📕</b>도감</button>
+<button onclick="exploreStart()"><b>🔎</b>탐험</button>
+<button onclick="mathStart()"><b>🧠</b>수학</button>
+<button onclick="show('collection');renderCollection()"><b>📕</b>도감</button>
 </div></div>
 
-<div id="modal" class="modal"><div class="sheet" id="sheet"></div></div>
+<div id="modal" class="modal"><div id="sheet" class="sheet"></div></div>
 
 <script>
-const foodsBase=[
- {id:'apple',name:'사과',emoji:'🍎'},{id:'strawberry',name:'딸기',emoji:'🍓'},{id:'banana',name:'바나나',emoji:'🍌'},
- {id:'riceball',name:'주먹밥',emoji:'🍙'},{id:'pizza',name:'피자',emoji:'🍕'},{id:'burger',name:'햄버거',emoji:'🍔'},
- {id:'cookie',name:'쿠키',emoji:'🍪'},{id:'cake',name:'케이크',emoji:'🍰'},{id:'icecream',name:'아이스크림',emoji:'🍦'},
- {id:'ramen',name:'라면',emoji:'🍜'},{id:'sushi',name:'초밥',emoji:'🍣'},{id:'dumpling',name:'만두',emoji:'🥟'},
- {id:'tteokbokki',name:'떡볶이',emoji:'🌶️'},{id:'kimbap',name:'김밥',emoji:'🍙'},{id:'grape',name:'포도',emoji:'🍇'}
+const BASE_FOODS=[
+{id:'apple',name:'사과',cat:'과일',emoji:'🍎',desc:'사과나무에서 열리는 과일이에요. 아삭하고 달콤한 맛이 나요.',tip:'껍질째 먹기도 하고 잘라서 먹기도 해요.'},
+{id:'strawberry',name:'딸기',cat:'과일',emoji:'🍓',desc:'작고 빨간 열매가 열리는 과일이에요. 달콤하고 향긋해요.',tip:'겉에 작은 씨처럼 보이는 점들이 있어요.'},
+{id:'banana',name:'바나나',cat:'과일',emoji:'🍌',desc:'노란 껍질을 벗겨 먹는 길쭉한 과일이에요.',tip:'껍질을 벗기면 부드럽고 달콤해요.'},
+{id:'grape',name:'포도',cat:'과일',emoji:'🍇',desc:'작은 알맹이가 여러 개 모여 송이를 이루는 과일이에요.',tip:'초록색, 보라색 등 여러 종류가 있어요.'},
+{id:'riceball',name:'주먹밥',cat:'밥',emoji:'🍙',desc:'밥을 동그랗게 뭉쳐 만든 음식이에요. 김을 둘러 먹기도 해요.',tip:'안에 참치, 멸치, 김치 같은 재료를 넣기도 해요.'},
+{id:'pizza',name:'피자',cat:'간식',emoji:'🍕',desc:'도우 위에 치즈와 여러 재료를 올려 구운 음식이에요.',tip:'여러 조각으로 나누어 함께 먹기 좋아요.'},
+{id:'burger',name:'햄버거',cat:'식사',emoji:'🍔',desc:'빵 사이에 고기와 채소 등을 넣어 먹는 음식이에요.',tip:'재료를 층층이 살펴보면 재미있어요.'},
+{id:'cookie',name:'쿠키',cat:'간식',emoji:'🍪',desc:'밀가루와 여러 재료를 반죽해 구운 달콤한 간식이에요.',tip:'초콜릿이나 견과류를 넣기도 해요.'},
+{id:'cake',name:'케이크',cat:'간식',emoji:'🍰',desc:'밀가루 반죽을 구워 크림이나 과일 등을 올린 음식이에요.',tip:'생일이나 특별한 날에 자주 먹어요.'},
+{id:'icecream',name:'아이스크림',cat:'간식',emoji:'🍦',desc:'차갑게 얼려 먹는 달콤한 디저트예요.',tip:'녹기 전에 천천히 먹어야 해요.'},
+{id:'ramen',name:'라면',cat:'면',emoji:'🍜',desc:'면을 국물과 함께 끓여 먹는 음식이에요.',tip:'뜨거울 수 있으니 조심해서 먹어요.'},
+{id:'sushi',name:'초밥',cat:'밥',emoji:'🍣',desc:'식초로 간한 밥에 생선이나 여러 재료를 올려 만든 음식이에요.',tip:'재료에 따라 모양과 맛이 달라져요.'},
+{id:'dumpling',name:'만두',cat:'간식',emoji:'🥟',desc:'만두피 안에 고기나 채소 등을 넣어 익혀 먹는 음식이에요.',tip:'찐만두, 군만두, 만둣국처럼 여러 방법으로 먹어요.'},
+{id:'tteokbokki',name:'떡볶이',cat:'분식',emoji:'🌶️',desc:'떡과 어묵 등을 양념에 넣어 끓여 먹는 음식이에요.',tip:'맵지 않은 떡볶이도 만들 수 있어요.'},
+{id:'kimbap',name:'김밥',cat:'분식',emoji:'🍙',desc:'밥과 여러 재료를 김으로 돌돌 말아 먹는 음식이에요.',tip:'잘라 놓으면 여러 조각으로 나누어 먹을 수 있어요.'}
 ];
-let state=JSON.parse(localStorage.getItem('mathFoodState')||'null')||{
- name:'',stars:0,solved:0,correct:0,unlocked:['apple','strawberry','banana'],custom:[],skills:{count:0,ten:0,add:0,carry:0,sub:0,borrow:0},seen:0
+
+const DEFAULT={
+version:2,name:'',stars:0,solved:0,correct:0,
+unlocked:['apple','strawberry','banana'],custom:[],
+skills:{count:0,ten:0,add:0,carry:0,sub:0,borrow:0}
 };
-function save(){localStorage.setItem('mathFoodState',JSON.stringify(state));updateUI()}
-function show(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='collection')renderFoods();if(id==='home')updateUI()}
-function updateUI(){
- document.getElementById('hello').textContent=state.name?`${state.name}의 수학 음식탐험`: '나만의 음식탐험을 시작해요';
- document.getElementById('stars').textContent=state.stars;document.getElementById('solved').textContent=state.solved;document.getElementById('foods').textContent=state.unlocked.length+state.custom.length;
- document.getElementById('collectionCount').textContent=`${state.unlocked.length+state.custom.length}개의 음식이 모였어요`;
+let state=loadState(), activeCat='전체', currentExplore=null, currentMath=null;
+
+function clone(x){return JSON.parse(JSON.stringify(x))}
+function loadState(){try{const x=JSON.parse(localStorage.getItem('mathFoodV2'));return x?Object.assign(clone(DEFAULT),x):clone(DEFAULT)}catch(e){return clone(DEFAULT)}}
+function save(){localStorage.setItem('mathFoodV2',JSON.stringify(state));updateHome()}
+function allFoods(){return BASE_FOODS.concat(state.custom)}
+function getFood(id){return allFoods().find(f=>f.id===id)}
+function updateHome(){
+ document.getElementById('hello').textContent=state.name?`${state.name}의 음식탐험`: '발견하고, 모으고, 생각해요';
+ document.getElementById('stars').textContent=state.stars;
+ document.getElementById('solved').textContent=state.solved;
+ document.getElementById('earned').textContent=state.unlocked.length;
+ document.getElementById('countText').textContent=`${state.unlocked.length+state.custom.length}개의 음식이 모였어요`;
 }
-function food(id){return foodsBase.find(f=>f.id===id)||state.custom.find(f=>f.id===id)}
-function randomFood(){let all=[...foodsBase.filter(f=>!state.unlocked.includes(f.id)),...state.custom];return all[Math.floor(Math.random()*all.length)]||foodsBase[0]}
-function rewardFood(){let f=randomFood();if(!f)return; if(!state.unlocked.includes(f.id)&&foodsBase.some(x=>x.id===f.id))state.unlocked.push(f.id);state.stars++; return f}
-function startExplore(){
- show('explore');let n=2+Math.floor(Math.random()*6), target=foodsBase[Math.floor(Math.random()*foodsBase.length)];
- document.getElementById('exploreQ').textContent=`${target.name} ${n}개를 찾아보세요!`;
- let arr=[];for(let i=0;i<n;i++)arr.push(target);for(let i=0;i<Math.max(2,n-2);i++){let f=foodsBase[Math.floor(Math.random()*foodsBase.length)];if(f.id!==target.id)arr.push(f)}
- arr.sort(()=>Math.random()-.5);document.getElementById('exploreObjects').innerHTML=arr.map(f=>`<button class="obj" onclick="tapExplore(this,'${f.id}','${target.id}')">${f.emoji}</button>`).join('');
- let choices=[n,Math.max(1,n-1),n+1].sort(()=>Math.random()-.5);
- document.getElementById('exploreChoices').innerHTML=choices.map(c=>`<button class="choice" onclick="answerExplore(${c},${n},'${target.id}')">${c}</button>`).join('');
- document.getElementById('exploreMsg').innerHTML='';
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='home')updateHome()}
+function pickFoodForReward(){
+ const locked=BASE_FOODS.filter(f=>!state.unlocked.includes(f.id));
+ if(locked.length)return locked[Math.floor(Math.random()*locked.length)];
+ return BASE_FOODS[Math.floor(Math.random()*BASE_FOODS.length)];
 }
-let tapped=[];
-function tapExplore(el,id,target){if(id!==target){el.style.opacity='.25';return}if(!el.dataset.t){el.dataset.t='1';el.style.transform='scale(1.18)';tapped.push(el)}}
-function answerExplore(c,n,target){state.solved++;if(c===n){state.correct++;state.skills.count++;let f=rewardFood();state.seen++;document.getElementById('exploreMsg').innerHTML=`<div class="message ok">🎉 정확해요! ${n}개를 찾았어요.<br><br>🎁 <b>${f.name}</b>을 획득했어요!</div>`;save();setTimeout(startExplore,1300)}else{document.getElementById('exploreMsg').innerHTML=`<div class="message bad">한 번 더 천천히 세어볼까요? 👀</div>`;save()}}
-function startMath(){show('math');nextMath()}
+function reward(){
+ const f=pickFoodForReward();
+ if(f && !state.unlocked.includes(f.id))state.unlocked.push(f.id);
+ state.stars++;
+ return f;
+}
+function randomDifferent(exclude){let arr=BASE_FOODS.filter(f=>f.id!==exclude);return arr[Math.floor(Math.random()*arr.length)]}
+
+/* 음식 탐험: 답을 먼저 알려주지 않고, 해당 음식만 이동시켜 모으게 함 */
+function exploreStart(){
+ show('explore');
+ const target=BASE_FOODS[Math.floor(Math.random()*BASE_FOODS.length)];
+ const count=3+Math.floor(Math.random()*8); // 3~10
+ let cells=[];
+ for(let i=0;i<count;i++)cells.push({f:target,selected:false});
+ while(cells.length<10){let f=randomDifferent(target.id);cells.push({f,selected:false})}
+ cells.sort(()=>Math.random()-.5);
+ currentExplore={target,count,cells};
+ document.getElementById('exploreTitle').innerHTML=`<div class="pill">오늘의 탐험</div><h2 style="font-size:30px;margin:10px 0">🧺 <b>${target.name}</b>만 골라서 모아 보세요.</h2><p class="small">몇 개인지는 아직 알려주지 않을게요. 다 모은 뒤 직접 세어 봐요!</p>`;
+ renderExplore();
+}
+function renderExplore(){
+ const x=currentExplore;
+ document.getElementById('exploreBoard').innerHTML=`<div class="grid5">${x.cells.map((c,i)=>`<button class="cell ${c.selected?'selected':''}" onclick="selectExplore(${i})">${c.f.emoji}</button>`).join('')}</div>`;
+ const chosen=x.cells.filter(c=>c.selected);
+ document.getElementById('basketBoard').innerHTML=`<div style="text-align:center;font-weight:900;margin-bottom:7px">🧺 내가 모은 음식</div><div class="grid5">${Array.from({length:10},(_,i)=>`<div class="cell">${chosen[i]?chosen[i].f.emoji:''}</div>`).join('')}</div>`;
+ const allSelected=x.cells.every(c=>c.selected);
+ document.getElementById('exploreAnswers').innerHTML=allSelected?`<div class="instructions"><b>이제 직접 세어 보세요.</b><br>몇 개인지 생각한 뒤 숫자를 골라 주세요.</div><div class="answerGrid">${[x.count-1,x.count,x.count+1,x.count+2].filter(n=>n>0&&n<=10).sort(()=>Math.random()-.5).map(n=>`<button class="answer" onclick="exploreAnswer(${n})">${n}</button>`).join('')}</div>`:'';
+}
+function selectExplore(i){
+ const x=currentExplore;
+ if(x.cells[i].f.id!==x.target.id)return;
+ x.cells[i].selected=!x.cells[i].selected;
+ renderExplore();
+}
+function exploreAnswer(n){
+ const x=currentExplore;state.solved++;
+ if(n===x.count){
+  state.correct++;state.skills.count++;
+  const f=reward();save();
+  document.getElementById('exploreMsg').innerHTML=`<div class="success">🎉 정확해요! <b>${n}개</b>였어요.<br>🎁 <b>${f.name}</b>을 새로 발견했어요!</div>`;
+  document.getElementById('exploreAnswers').innerHTML='';
+  setTimeout(exploreStart,1400);
+ }else{
+  document.getElementById('exploreMsg').innerHTML=`<div class="retry">🙂 괜찮아요. 바구니의 음식을 <b>한 칸씩 다시 세어</b> 보세요.</div>`;
+  save();
+ }
+}
+
+/* 수학 놀이터 */
+function mathStart(){show('math');nextMath()}
 function nextMath(){
  let r=Math.random(), q;
- if(state.seen<3 || r<.22){let n=Math.floor(Math.random()*9)+1;q={type:'ten',a:n,b:10-n,ans:10,stage:'10 만들기',text:`${n}개가 있어요. 10개가 되려면 몇 개가 더 필요할까요?`,visual:[...Array(n)].map(()=>`🍎`).join('')}}
- else if(r<.58){let a=Math.floor(Math.random()*9)+1,b=Math.floor(Math.random()*9)+1;q={type:a+b>9?'carry':'add',a,b,ans:a+b,stage:a+b>9?'받아올림 준비':'덧셈',text:`${a} + ${b} = ?`,visual:visualAdd(a,b)}}
- else {let a=Math.floor(Math.random()*8)+5,b=Math.floor(Math.random()*Math.min(8,a-1))+1;q={type:a-b>=10?'sub':'sub',a,b,ans:a-b,stage:'뺄셈',text:`${a} - ${b} = ?`,visual:visualSub(a,b)}}
- window.currentQ=q;document.getElementById('mathStage').textContent=q.stage;document.getElementById('mathQ').textContent=q.text;document.getElementById('mathVisual').innerHTML=q.visual;
- let opts=new Set([q.ans,Math.max(0,q.ans-1),q.ans+1,q.ans+2]);let choices=[...opts].sort(()=>Math.random()-.5);
- document.getElementById('mathChoices').innerHTML=choices.map(c=>`<button class="choice" onclick="answerMath(${c})">${c}</button>`).join('');
- document.getElementById('mathMsg').innerHTML='';document.getElementById('mathProgress').style.width=Math.min(100,(state.solved%10)*10+10)+'%';
+ if(r<.28){
+   const a=1+Math.floor(Math.random()*9), b=10-a;
+   q={type:'ten',stage:'🔟 10 만들기',text:`${a}개가 있어요. 10개가 되려면 몇 개가 더 필요할까요?`,ans:b,kind:'ten',a,b};
+ }else if(r<.58){
+   const a=1+Math.floor(Math.random()*9), b=1+Math.floor(Math.random()*9);
+   q={type:a+b>=10?'carry':'add',stage:a+b>=10?'🍎 10을 넘어 모으기':'➕ 덧셈',text:`${a} + ${b} = ?`,ans:a+b,kind:'add',a,b};
+ }else{
+   const a=6+Math.floor(Math.random()*15), b=1+Math.floor(Math.random()*(a-1));
+   q={type:(a%10)<b?'borrow':'sub',stage:(a%10)<b?'🍪 10을 풀어 빼기':'➖ 뺄셈',text:`${a} − ${b} = ?`,ans:a-b,kind:'sub',a,b};
+ }
+ currentMath=q;renderMath();
 }
-function visualAdd(a,b){let left='';for(let i=0;i<a;i++)left+='🍎';let right='';for(let i=0;i<b;i++)right+='🍎';let all=a+b;if(all>=10){let mini='';for(let i=0;i<10;i++)mini+='🍎';let rem='';for(let i=0;i<all-10;i++)rem+='🍎';return `<div>${left} ＋ ${right}</div><div style="font-size:18px;margin-top:12px">10개가 모이면 <b>한 묶음</b>이에요</div><div class="row" style="justify-content:center;margin-top:10px"><div class="bundle"><div class="mini">${mini}</div><b>10개 묶음</b></div><div style="font-size:32px">＋</div><div style="font-size:30px">${rem||'없음'}</div></div>`}return `<div>${left} ＋ ${right}</div>`}
-function visualSub(a,b){let s='';for(let i=0;i<a;i++)s+=`<span class="obj">${i<b?'🍪':'🍪'}</span>`;return `<div style="font-size:18px;margin-bottom:8px">🍪 ${a}개에서 ${b}개를 빼요</div><div>${s}</div>`}
-function answerMath(c){
- let q=window.currentQ;state.solved++;
- if(c===q.ans){state.correct++;state.skills[q.type]++;let f=rewardFood();document.getElementById('mathMsg').innerHTML=`<div class="message ok">🎉 정답이에요!<br><br>🎁 <b>${f.name}</b>을 획득했어요!</div>`;save();setTimeout(nextMath,1500)}
- else{document.getElementById('mathMsg').innerHTML=`<div class="message bad">괜찮아요. 다시 그림을 보면서 생각해봐요. 🙂</div>`;save()}
+function array10(n,emoji='🍎',extraClass=''){
+ return `<div class="grid5">${Array.from({length:10},(_,i)=>`<div class="cell ${i<n?'filled '+extraClass:''}">${i<n?emoji:''}</div>`).join('')}</div>`;
 }
-function renderFoods(){
- let unlocked=state.unlocked.map(id=>food(id)).filter(Boolean), locked=foodsBase.filter(f=>!state.unlocked.includes(f.id));
- let custom=state.custom;
- let html=[...unlocked,...custom].map(f=>`<div class="food"><div class="pic">${f.image?`<img src="${f.image}">`:f.emoji}</div><b>${f.name}</b><div class="tag">${custom.includes(f)?'내가 발견':'수학으로 획득'}</div></div>`).join('');
- html+=locked.map(f=>`<div class="food lock"><div class="pic">❓</div><b>새 음식</b><div class="tag">수학으로 발견</div></div>`).join('');
- document.getElementById('foodGrid').innerHTML=html;
+function arrayN(n,emoji='🍎'){
+ let out='';for(let start=0;start<n;start+=10){const part=Math.min(10,n-start);out+=array10(part,emoji)}
+ return out;
 }
-function newFoodModal(){
- document.getElementById('modal').classList.add('show');
- document.getElementById('sheet').innerHTML=`<h2>📸 새로운 음식 발견</h2>
- <p>아이에게 익숙한 음식이면 직접 사진을 찍거나 그림을 그려서 도감에 넣어보세요.</p>
- <label>음식 이름</label><input id="newName" type="text" placeholder="예: 떡볶이">
- <label>사진 선택 또는 촬영</label><input id="newPhoto" type="file" accept="image/*" capture="environment">
- <label>직접 그리기 (선택)</label><canvas id="draw" width="800" height="520"></canvas>
- <div class="row" style="margin-top:10px"><button class="secondary" onclick="clearCanvas()">지우기</button><button class="action" onclick="saveCustomFood()">도감에 등록</button><button class="secondary" onclick="closeModal()">취소</button></div>`;
- setupCanvas();
+function mathVisual(q){
+ if(q.kind==='ten')return `<div style="font-size:18px;text-align:center;margin-bottom:8px">현재 ${q.a}개</div>${array10(q.a,'🍎')}<div style="text-align:center;margin:10px 0;font-size:18px">빈칸을 채우면 10개가 돼요.</div>${array10(0,'🍓')}`;
+ if(q.kind==='add'){
+   const total=q.a+q.b;
+   return `<div class="columns"><div><b>첫 번째</b>${arrayN(q.a,'🍎')}</div><div><b>두 번째</b>${arrayN(q.b,'🍓')}</div></div><div class="instructions">두 무리를 합쳐서 몇 개인지 생각해 보세요. 10개가 모이면 한 묶음으로 볼 수 있어요.</div>${total>=10?`<div class="board"><b>10개가 모이는 모습</b>${array10(10,'🍎')}<div style="text-align:center;margin-top:8px">🔟 10개 = 1묶음</div></div>`:''}`;
+ }
+ const ones=q.a%10,tens=Math.floor(q.a/10);
+ let html=`<div class="columns"><div><b>전체 ${q.a}개</b><div class="board">${tens?`<div class="pill">🔟 ${tens}묶음</div>`:''}${array10(ones,'🍪')}</div></div><div><b>빼야 하는 수 ${q.b}개</b>${arrayN(q.b,'🍓')}</div></div>`;
+ if(ones<q.b)html+=`<div class="instructions">일의 자리에는 ${ones}개밖에 없어요. 그래서 🔟 10개 묶음 하나를 <b>실제 음식 10개로 풀어서</b> 빌려 와야 해요.</div><div class="board"><b>10개 묶음을 풀면</b>${array10(10,'🍪')}</div>`;
+ return html;
 }
-let ctx,drawing=false;
-function setupCanvas(){let c=document.getElementById('draw');ctx=c.getContext('2d');ctx.lineWidth=10;ctx.lineCap='round';ctx.strokeStyle='#222';
- function pos(e){let r=c.getBoundingClientRect(),p=e.touches?e.touches[0]:e;return{x:(p.clientX-r.left)*c.width/r.width,y:(p.clientY-r.top)*c.height/r.height}}
- c.onpointerdown=e=>{drawing=true;let p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)};c.onpointermove=e=>{if(!drawing)return;let p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke()};c.onpointerup=()=>drawing=false;c.onpointerleave=()=>drawing=false;
+function makeChoices(ans){
+ let s=new Set([ans]);
+ while(s.size<4){let d=[-2,-1,1,2,3][Math.floor(Math.random()*5)];let n=ans+d;if(n>=0)s.add(n)}
+ return [...s].sort(()=>Math.random()-.5);
 }
-function clearCanvas(){ctx.clearRect(0,0,800,520)}
-function compressImage(file,max=720,quality=.72){return new Promise((res,rej)=>{let img=new Image(),r=new FileReader();r.onload=()=>{img.onload=()=>{let scale=Math.min(1,max/Math.max(img.width,img.height)),c=document.createElement('canvas');c.width=Math.round(img.width*scale);c.height=Math.round(img.height*scale);c.getContext('2d').drawImage(img,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',quality))};img.src=r.result};r.onerror=rej;r.readAsDataURL(file)})}
-async function saveCustomFood(){
- let name=document.getElementById('newName').value.trim();if(!name){alert('음식 이름을 입력해주세요.');return}
- let file=document.getElementById('newPhoto').files[0], image='';
- if(file) image=await compressImage(file);
- else {let blank=document.createElement('canvas');blank.width=400;blank.height=260;let b=blank.getContext('2d');b.fillStyle='#fff7d6';b.fillRect(0,0,400,260);b.drawImage(document.getElementById('draw'),0,0,400,260);image=blank.toDataURL('image/jpeg',.72)}
- let id='custom_'+Date.now();state.custom.push({id,name,image,emoji:'🍽️'});save();closeModal();show('collection')
+function renderMath(){
+ const q=currentMath;
+ document.getElementById('stageLabel').textContent=q.stage;
+ document.getElementById('mathQuestion').textContent=q.text;
+ document.getElementById('mathBoard').innerHTML=mathVisual(q);
+ let intro=q.kind==='ten'?'🍓 부족한 수를 생각해 보고 답을 골라 보세요.':q.kind==='add'?'🍎와 🍓를 한데 모은 모습을 생각해 보세요.':'🍪 남는 수를 생각해 보세요.';
+ document.getElementById('mathGuide').innerHTML=intro;
+ document.getElementById('mathAnswers').innerHTML=makeChoices(q.ans).map(n=>`<button class="answer" onclick="mathAnswer(this,${n})">${n}</button>`).join('');
+ document.getElementById('mathMsg').innerHTML='';
 }
+function mathAnswer(btn,n){
+ document.querySelectorAll('#mathAnswers .answer').forEach(b=>b.classList.remove('selected','wrong','correct'));
+ btn.classList.add('selected'); // 선택했다는 표시
+ state.solved++;
+ if(n===currentMath.ans){
+   btn.classList.add('correct');state.correct++;state.skills[currentMath.type]++;
+   const f=reward();save();
+   document.getElementById('mathMsg').innerHTML=`<div class="success">🎉 정답이에요!<br>🎁 <b>${f.name}</b>을 획득했어요.</div>`;
+   document.getElementById('mathAnswers').querySelectorAll('.answer').forEach(b=>b.disabled=true);
+   setTimeout(nextMath,1500);
+ }else{
+   btn.classList.add('wrong');
+   document.getElementById('mathMsg').innerHTML=`<div class="retry">🤔 선택한 답은 잠깐 그대로 두고, 그림을 다시 살펴보세요.<br><b>다른 답을 골라 볼 수 있어요.</b></div>`;
+   save();
+ }
+}
+
+/* 음식도감 */
+function renderCollection(){
+ const cats=['전체',...new Set(allFoods().map(f=>f.cat))];
+ document.getElementById('foodFilters').innerHTML=cats.map(c=>`<button class="chip ${activeCat===c?'on':''}" onclick="activeCat='${c}';renderCollection()">${c}</button>`).join('');
+ const unlocked=state.unlocked.map(getFood).filter(Boolean), custom=state.custom;
+ let list=[...unlocked,...custom];
+ if(activeCat!=='전체')list=list.filter(f=>f.cat===activeCat);
+ const locked=BASE_FOODS.filter(f=>!state.unlocked.includes(f.id)&&(activeCat==='전체'||f.cat===activeCat));
+ document.getElementById('foodGrid').innerHTML=list.map(foodCard).join('')+locked.map(f=>`<div class="foodcard locked"><div class="foodpic">❓</div><div class="foodct"><div class="foodname">새로운 음식</div><div class="fooddesc">수학 탐험을 하면 발견할 수 있어요.</div></div></div>`).join('');
+}
+function foodCard(f){
+ const isCustom=state.custom.some(x=>x.id===f.id);
+ return `<button class="foodcard" style="text-align:left;padding:0;width:100%" onclick="foodDetail('${f.id}')"><div class="foodpic">${f.image?`<img src="${f.image}" alt="">`:f.emoji}</div><div class="foodct"><div class="foodname">${f.name}</div><div class="pill">${isCustom?'내가 발견':'수학으로 발견'}</div><div class="fooddesc">${f.desc||'아직 설명이 없어요.'}</div></div></button>`;
+}
+function foodDetail(id){
+ const f=getFood(id);if(!f)return;
+ openModal(`<h2>${f.image?`<img src="${f.image}" style="width:100%;max-height:300px;object-fit:cover;border-radius:18px">`:`<div style="font-size:80px;text-align:center">${f.emoji}</div>`}</h2>
+ <h2>${f.name}</h2><div class="pill">${f.cat}</div>
+ <div class="instructions"><b>🍴 어떤 음식일까요?</b><br>${f.desc||'아직 설명이 없어요.'}<br><br><b>💡 알아두면 좋은 점</b><br>${f.tip||'내가 직접 설명을 적어볼 수도 있어요.'}</div>
+ <div class="row"><button class="secondary" onclick="closeModal()">닫기</button></div>`);
+}
+
+/* 사진/그림으로 새 음식 등록 */
+function newFood(){
+ openModal(`<h2>📸 새로운 음식 발견</h2><p>아이가 좋아하는 방식으로 음식을 하나 더 만들어 보세요.</p>
+ <div class="field"><label>음식 이름</label><input id="nfName" placeholder="예: 떡볶이"></div>
+ <div class="field"><label>간단한 설명</label><textarea id="nfDesc" placeholder="예: 떡과 어묵을 매콤달콤한 양념에 넣어 먹는 음식이에요."></textarea></div>
+ <div class="field"><label>사진 선택 / 촬영</label><input id="nfPhoto" type="file" accept="image/*" capture="environment"></div>
+ <div class="field"><label>또는 직접 그리기</label><canvas id="drawCanvas" width="900" height="520"></canvas></div>
+ <div class="row"><button class="secondary" onclick="clearDraw()">지우기</button><button class="action" onclick="saveNewFood()">도감에 등록</button><button class="secondary" onclick="closeModal()">취소</button></div>`);
+ setupDraw();
+}
+let drawCtx,drawing=false;
+function setupDraw(){const c=document.getElementById('drawCanvas');drawCtx=c.getContext('2d');drawCtx.lineWidth=12;drawCtx.lineCap='round';drawCtx.lineJoin='round';drawCtx.strokeStyle='#202124';c.onpointerdown=e=>{drawing=true;const p=canvasPos(c,e);drawCtx.beginPath();drawCtx.moveTo(p.x,p.y)};c.onpointermove=e=>{if(!drawing)return;const p=canvasPos(c,e);drawCtx.lineTo(p.x,p.y);drawCtx.stroke()};c.onpointerup=()=>drawing=false;c.onpointerleave=()=>drawing=false}
+function canvasPos(c,e){const r=c.getBoundingClientRect();return{x:(e.clientX-r.left)*c.width/r.width,y:(e.clientY-r.top)*c.height/r.height}}
+function clearDraw(){drawCtx.clearRect(0,0,900,520)}
+function compress(file,max=720,q=.72){return new Promise((resolve,reject)=>{const r=new FileReader();const im=new Image();r.onload=()=>{im.onload=()=>{const scale=Math.min(1,max/Math.max(im.width,im.height));const c=document.createElement('canvas');c.width=Math.round(im.width*scale);c.height=Math.round(im.height*scale);c.getContext('2d').drawImage(im,0,0,c.width,c.height);resolve(c.toDataURL('image/jpeg',q))};im.src=r.result};r.onerror=reject;r.readAsDataURL(file)})}
+async function saveNewFood(){
+ const name=document.getElementById('nfName').value.trim();if(!name){alert('음식 이름을 입력해 주세요.');return}
+ const desc=document.getElementById('nfDesc').value.trim()||'내가 직접 발견하고 등록한 음식이에요.';
+ const file=document.getElementById('nfPhoto').files[0];let image='';
+ if(file)image=await compress(file);
+ else {const c=document.createElement('canvas');c.width=450;c.height=260;c.getContext('2d').drawImage(document.getElementById('drawCanvas'),0,0,450,260);image=c.toDataURL('image/jpeg',.72)}
+ state.custom.push({id:'custom_'+Date.now(),name,cat:'내 음식',emoji:'🍽️',desc,tip:'내가 사진을 찍거나 직접 그려서 등록했어요.',image});
+ save();closeModal();activeCat='전체';show('collection');renderCollection();
+}
+function openModal(html){document.getElementById('sheet').innerHTML=html;document.getElementById('modal').classList.add('show')}
 function closeModal(){document.getElementById('modal').classList.remove('show')}
-function openParent(){
- document.getElementById('modal').classList.add('show');document.getElementById('sheet').innerHTML=`<h2>🔐 부모님 모드</h2><p>기본 PIN은 <b>1234</b>입니다. 첫 버전에서 확인용으로 사용하며, 추후 PIN 변경 기능을 강화할 수 있습니다.</p><input id="pin" type="password" inputmode="numeric" placeholder="PIN 4자리"><div class="row" style="margin-top:12px"><button class="action" onclick="checkPin()">들어가기</button><button class="secondary" onclick="closeModal()">취소</button></div>`;
+
+/* 부모님 모드 / 백업 */
+function parentGate(){openModal(`<h2>🔐 부모님 모드</h2><p>기본 PIN은 <b>1234</b>입니다.</p><input id="pin" type="password" inputmode="numeric" placeholder="PIN 4자리"><div class="row" style="margin-top:12px"><button class="action" onclick="checkPin()">확인</button><button class="secondary" onclick="closeModal()">취소</button></div>`)}
+function checkPin(){if(document.getElementById('pin').value==='1234'){closeModal();renderParent();show('parent')}else alert('PIN이 맞지 않습니다.')}
+function renderParent(){
+ document.getElementById('pSolved').textContent=state.solved;document.getElementById('pCorrect').textContent=state.correct;document.getElementById('pAcc').textContent=state.solved?Math.round(state.correct/state.solved*100)+'%':'0%';
+ const labels={count:'수 세기',ten:'10의 개념',add:'덧셈',carry:'10을 넘어 모으기',sub:'뺄셈',borrow:'10을 풀어 빼기'};
+ document.getElementById('skills').innerHTML=Object.entries(state.skills).map(([k,v])=>`<p><b>${labels[k]}</b> — ${v}회 경험</p>`).join('');
+ document.getElementById('nameInput').value=state.name;
 }
-function checkPin(){if(document.getElementById('pin').value==='1234'){closeModal();document.getElementById('pSolved').textContent=state.solved;document.getElementById('pCorrect').textContent=state.correct;document.getElementById('pAccuracy').textContent=state.solved?Math.round(state.correct/state.solved*100)+'%':'0%';let labels={count:'수 세기',ten:'10의 개념',add:'덧셈',carry:'받아올림 준비',sub:'뺄셈',borrow:'받아내림'};document.getElementById('skills').innerHTML=Object.entries(state.skills).map(([k,v])=>`<p><b>${labels[k]}</b> — ${v}회 경험</p>`).join('');document.getElementById('childName').value=state.name;show('parent')}else alert('PIN이 맞지 않습니다.')}
-function saveName(){state.name=document.getElementById('childName').value.trim();save();alert('저장했습니다.');}
+function saveName(){state.name=document.getElementById('nameInput').value.trim();save();alert('저장했습니다.')}
 function backup(){
- let blob=new Blob([JSON.stringify({version:'V1',createdAt:new Date().toISOString(),state})],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='음식탐험_수학놀이터_전체백업.json';a.click();URL.revokeObjectURL(a.href)
+ const payload={app:'음식탐험 수학놀이터',version:2,createdAt:new Date().toISOString(),state};
+ const blob=new Blob([JSON.stringify(payload)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='음식탐험_수학놀이터_전체백업.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)
 }
-function restore(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.state)throw Error();state=x.state;save();alert('복원했습니다. 사진과 학습 기록도 함께 복원됩니다.');show('home')}catch(err){alert('백업 파일을 읽을 수 없습니다.')}};r.readAsText(f)}
-updateUI();
+function restore(e){const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=()=>{try{const x=JSON.parse(r.result);if(!x.state)throw 0;state=x.state;save();alert('전체 데이터를 복원했습니다.');renderCollection();show('home')}catch(err){alert('백업 파일을 읽을 수 없습니다.')}};r.readAsText(file)}
+updateHome();
 </script>
 </body>
 </html>
