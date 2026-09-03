@@ -2,196 +2,135 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<meta name="theme-color" content="#fff7d6">
-<title>음식탐험 수학놀이터 V3</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>내 음식마을</title>
 <style>
-*{box-sizing:border-box} :root{--ink:#202124;--muted:#68707b;--paper:#fffdf8;--card:#fff;--line:#e7dfcf;--yellow:#ffe47b;--blue:#dceeff;--green:#dff5e2;--red:#ffe3df;--shadow:0 7px 22px rgba(40,30,10,.08)}
-html,body{margin:0;min-height:100%;background:linear-gradient(#fffdf8,#f5f9ff);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
-body{font-size:18px}.app{max-width:1000px;margin:auto;padding:14px 14px 92px}
-button,input,textarea{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}
-header{display:flex;align-items:center;justify-content:space-between;gap:10px}.brand{font-size:28px;font-weight:950}.small{font-size:14px;color:var(--muted)}
-.icon{width:52px;height:52px;border:2px solid #555;border-radius:18px;background:#fff;font-size:23px}
-.screen{display:none}.screen.active{display:block}.hero{margin-top:10px;border:1px solid var(--line);border-radius:30px;padding:25px;background:linear-gradient(135deg,#fff2af,#e8f5ff);box-shadow:var(--shadow)}
-.hero h1{font-size:38px;line-height:1.2;margin:0 0 10px}.hero p{margin:0;line-height:1.55;font-size:20px}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px}.big{background:#fff;border:2px solid #eee5ca;border-radius:24px;min-height:135px;padding:18px;text-align:left;box-shadow:var(--shadow)}.big .e{font-size:43px}.big strong{display:block;font-size:22px;margin-top:7px}.big span{display:block;color:var(--muted);font-size:15px;margin-top:4px}
-.section{display:flex;justify-content:space-between;align-items:center;margin:24px 2px 10px}.section h2{margin:0;font-size:25px}.card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:var(--shadow)}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:#f8f5ec;border-radius:18px;padding:13px;text-align:center}.stat b{font-size:28px;display:block}
-.action{background:#202124;color:#fff;border-radius:16px;padding:13px 17px;font-weight:850}.secondary{background:#f0eee8;color:#222;border-radius:16px;padding:13px 17px;font-weight:850}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.nav{position:fixed;z-index:20;left:0;right:0;bottom:0;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid #ddd}.navin{max-width:1000px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr)}.nav button{background:transparent;border:0;padding:10px 3px;font-size:13px}.nav button b{display:block;font-size:23px}
-.pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#f0eee7;font-size:13px}.story{font-size:21px;line-height:1.5}.speech{background:#fff8d9;border:2px solid #efd77a;border-radius:20px;padding:14px;position:relative;margin:12px 0}.speech:after{content:"";position:absolute;left:26px;bottom:-11px;width:18px;height:18px;background:#fff8d9;border-right:2px solid #efd77a;border-bottom:2px solid #efd77a;transform:rotate(45deg)}
-.board{background:#fff9df;border:3px solid #e8d79a;border-radius:20px;padding:9px;margin:13px auto;max-width:720px}.grid5{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.cell{min-height:62px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;position:relative}.cell.selected{outline:4px solid #70a7f3;transform:scale(1.03);z-index:2}.cell.disabled{opacity:.3}.foodart{width:52px;height:52px;display:block}.basketTitle{text-align:center;font-weight:900;margin-bottom:7px}.empty{color:#aaa;font-size:14px}
-.answerGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:15px}.answer{min-height:70px;border:3px solid #e5e1d7;border-radius:18px;background:#fff;font-size:28px;font-weight:900}.answer.selected{border-color:#5d94e8;background:#eaf3ff;box-shadow:0 0 0 3px #cfe2ff inset}.answer.correct{border-color:#54a55d;background:#eaf8eb}.answer.wrong{border-color:#e07b72;background:#fff0ee}
-.success{background:var(--green);border-radius:18px;padding:15px;line-height:1.5;margin-top:14px}.retry{background:#fff3c4;border-radius:18px;padding:15px;line-height:1.5;margin-top:14px}.instructions{background:#f5f8ff;border-radius:17px;padding:14px;line-height:1.55;margin:12px 0}
-.foodgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.foodcard{background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden}.foodpic{height:165px;background:#f7f6f2;display:flex;align-items:center;justify-content:center}.foodpic img{width:100%;height:100%;object-fit:cover}.foodpic .foodart{width:105px;height:105px}.foodct{padding:12px}.foodname{font-size:20px;font-weight:900}.fooddesc{font-size:14px;line-height:1.55;color:#555;margin-top:6px}.locked{filter:grayscale(1);opacity:.38}
-.filters{display:flex;gap:8px;overflow:auto;padding-bottom:8px}.chip{white-space:nowrap;border:0;border-radius:999px;background:#eee;padding:9px 13px}.chip.on{background:#202124;color:#fff}
-.modal{position:fixed;z-index:50;inset:0;background:rgba(0,0,0,.42);display:none;align-items:flex-end;justify-content:center}.modal.show{display:flex}.sheet{width:min(760px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:28px 28px 0 0;padding:22px}.field{margin:12px 0}.field label{display:block;font-weight:850;font-size:15px;margin-bottom:6px}.field input,.field textarea{width:100%;padding:13px;border:2px solid #ddd6c7;border-radius:14px;background:#fff}.field textarea{min-height:90px}
-canvas{width:100%;height:240px;border:2px dashed #cfc9bc;border-radius:18px;background:#fff;touch-action:none}
-.reward{font-size:23px;font-weight:900}.hidden{display:none}
-@media(min-width:720px){.foodgrid{grid-template-columns:repeat(4,1fr)}.grid{grid-template-columns:repeat(4,1fr)}.modal{align-items:center}.sheet{border-radius:26px}}
-@media(max-width:460px){.hero h1{font-size:31px}.brand{font-size:23px}.grid{grid-template-columns:1fr}.answerGrid{grid-template-columns:repeat(2,1fr)}.cell{min-height:54px}.foodart{width:45px;height:45px}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:#fff8ed;color:#3b3028;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+button{font:inherit;border:0;cursor:pointer}
+.app{max-width:900px;margin:auto;min-height:100vh;padding-bottom:40px}
+header{padding:22px 20px 12px;display:flex;justify-content:space-between;align-items:center}
+h1{font-size:30px;margin:0}.sub{color:#7c6b5e;margin-top:5px}
+.iconbtn{background:white;border:2px solid #eadcc9;border-radius:16px;padding:10px 13px}
+.home{padding:10px 18px}
+.hero{background:white;border-radius:28px;padding:24px;margin-bottom:18px;box-shadow:0 5px 20px #d8c7b333}
+.hero h2{margin:0 0 8px;font-size:26px}.hero p{margin:0;color:#74665b;line-height:1.6}
+.world{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.place{background:white;border-radius:24px;padding:20px;min-height:155px;border:2px solid #f0e2d2;text-align:left}
+.place .emoji{font-size:48px}.place b{display:block;font-size:20px;margin-top:8px}.place span{font-size:14px;color:#7c6b5e}
+.section{margin:24px 0 10px;font-size:20px}
+.collection{display:flex;gap:10px;overflow:auto;padding-bottom:8px}
+.food{min-width:112px;background:white;border-radius:20px;padding:12px;text-align:center;border:2px solid #f0e2d2}
+.food .pic{font-size:42px}.food b{display:block;margin-top:4px}
+.screen{display:none}.screen.active{display:block}
+.back{background:none;padding:5px 0;color:#806c5a;margin-bottom:12px}
+.card{background:white;border-radius:28px;padding:24px;box-shadow:0 5px 20px #d8c7b333}
+.bigfood{text-align:center;font-size:90px}.question{font-size:25px;text-align:center;line-height:1.5;margin:12px 0 22px}
+.choices{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.choice{background:#fff4df;border:3px solid #f0d9b7;border-radius:22px;padding:18px;font-size:28px;min-height:72px}.choice:active{transform:scale(.97)}
+.feedback{text-align:center;min-height:32px;margin-top:15px;font-weight:700;font-size:18px}
+.objects{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px auto;max-width:560px}
+.obj{font-size:34px;background:#fff7ea;border-radius:12px;padding:3px 6px}
+.trays{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:18px 0}.tray{min-width:190px;min-height:92px;background:#f7efe4;border:3px dashed #d9c3a8;border-radius:20px;padding:10px;text-align:center}.tray.full{border-style:solid}.tray .mini{font-size:25px}
+.actionrow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.action{background:#6b4f3b;color:white;border-radius:18px;padding:13px 20px}.secondary{background:#f1e4d3;color:#5b493a}
+.note{background:#fff7e8;border-radius:18px;padding:14px;margin-top:18px;color:#705f51;line-height:1.5}
+.parent{margin-top:20px}.parent summary{cursor:pointer;font-weight:700}.parentbox{background:#fff;border:2px solid #eadcc9;border-radius:20px;padding:16px;margin-top:10px}
+.stat{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat div{background:#fff7ea;border-radius:15px;padding:12px;text-align:center}.stat b{display:block;font-size:22px}
+@media(min-width:700px){.world{grid-template-columns:repeat(4,1fr)}}
 </style>
 </head>
 <body>
 <div class="app">
-<header><div><div class="brand">🍴 음식탐험 수학놀이터</div><div id="hello" class="small"></div></div><button class="icon" onclick="parentGate()">👨‍👩‍👧</button></header>
+<header><div><h1>🍎 내 음식마을</h1><div class="sub">먹고, 만들고, 발견하다 보면 숫자도 자라요</div></div><button class="iconbtn" onclick="go('home')">🏠</button></header>
 
+<main class="home">
 <section id="home" class="screen active">
-<div class="hero"><h1>오늘 주방에<br>무슨 일이 생겼을까요? 🍳</h1><p>손님을 도와 음식을 준비하고, 음식을 모으다 보면 자연스럽게 수를 생각하게 돼요.</p></div>
-<div class="grid">
-<button class="big" onclick="storyStart()"><div class="e">🍽️</div><strong>오늘의 주방</strong><span>손님 주문을 도와주세요</span></button>
-<button class="big" onclick="exploreStart()"><div class="e">🔎</div><strong>음식 탐험</strong><span>같은 음식을 찾아 바구니에 모아요</span></button>
-<button class="big" onclick="show('collection');renderCollection()"><div class="e">📕</div><strong>나의 음식도감</strong><span id="countText">0개의 음식</span></button>
-<button class="big" onclick="newFood()"><div class="e">📸</div><strong>새 음식 발견</strong><span>사진이나 그림으로 내 도감을 채워요</span></button>
+<div class="hero"><h2>오늘은 어디로 가볼까?</h2><p>음식을 고르고 놀다 보면 자연스럽게 세고, 모으고, 나누고, 바꾸는 일이 생겨요.</p></div>
+<h3 class="section">🍽️ 음식마을</h3>
+<div class="world">
+<button class="place" onclick="start('market')"><div class="emoji">🛒</div><b>맛있는 시장</b><span>사고, 담고, 더해요</span></button>
+<button class="place" onclick="start('pizza')"><div class="emoji">🍕</div><b>피자 가게</b><span>잘라서 나누고 주문해요</span></button>
+<button class="place" onclick="start('bakery')"><div class="emoji">🥐</div><b>빵집</b><span>같이 나누어 담아요</span></button>
+<button class="place" onclick="start('kitchen')"><div class="emoji">🍳</div><b>우리 주방</b><span>재료를 모아 요리해요</span></button>
 </div>
-<div class="section"><h2>오늘의 기록</h2></div><div class="card"><div class="stats"><div class="stat"><b id="stars">0</b>⭐<br>별</div><div class="stat"><b id="solved">0</b>개<br>미션</div><div class="stat"><b id="earned">0</b>개<br>획득</div></div></div>
+<h3 class="section">📖 내가 발견한 음식</h3>
+<div class="collection" id="collection"></div>
+<details class="parent"><summary>부모님 보기</summary><div class="parentbox"><div class="stat"><div><b id="played">0</b>번</div><div><b id="foods">0</b>가지</div><div><b id="ten">0</b>회</div></div><div class="note">아이에게는 수학 문제 대신 음식 이야기와 행동을 보여주고, 부모님 화면에서만 학습 경험을 확인합니다.</div></div></details>
 </section>
 
-<section id="explore" class="screen">
-<div class="section"><h2>🔎 음식 탐험</h2><button class="secondary" onclick="show('home')">나가기</button></div>
-<div class="card"><div id="exploreTitle"></div><div id="exploreBoard" class="board"></div>
-<div class="instructions">👆 손님이 찾는 <b>그 음식과 똑같은 그림</b>만 눌러서 아래 바구니에 옮겨 주세요.<br><b>몇 개인지는 미리 알려주지 않아요.</b> 다 모은 뒤 직접 세어 봅니다.</div>
-<div id="basketBoard" class="board"></div><div id="exploreAnswers"></div><div id="exploreMsg"></div></div>
-</section>
-
-<section id="story" class="screen">
-<div class="section"><h2 id="storyHeading">🍽️ 오늘의 주방</h2><button class="secondary" onclick="show('home')">나가기</button></div>
-<div class="card"><div id="storyBody"></div><div id="storyBoard" class="board"></div><div id="storyAnswers"></div><div id="storyMsg"></div></div>
-</section>
-
-<section id="collection" class="screen">
-<div class="section"><h2>📕 나의 음식도감</h2><button class="action" onclick="newFood()">➕ 새 음식</button></div>
-<div class="card"><p>수학 미션으로 발견한 음식과 내가 직접 등록한 음식이 차곡차곡 쌓여요.</p><div id="foodFilters" class="filters"></div><div id="foodGrid" class="foodgrid"></div></div>
-</section>
-
-<section id="parent" class="screen">
-<div class="section"><h2>👨‍👩‍👧 부모님 모드</h2><button class="secondary" onclick="show('home')">닫기</button></div>
-<div class="card"><h2>학습 현황</h2><div class="stats"><div class="stat"><b id="pSolved">0</b>미션</div><div class="stat"><b id="pCorrect">0</b>성공</div><div class="stat"><b id="pAcc">0%</b>성공률</div></div><h3>개념별 경험</h3><div id="skills"></div>
-<h3>데이터 안전관리</h3><div class="row"><button class="action" onclick="backup()">📦 전체 백업</button><label class="secondary" style="cursor:pointer">📥 복원<input id="restoreFile" type="file" accept=".json" style="display:none" onchange="restore(event)"></label></div>
-<p class="small">음식도감, 사진/그림, 학습 기록을 함께 백업합니다.</p><hr><h3>아이 이름</h3><div class="row"><input id="nameInput" style="flex:1;min-width:180px" placeholder="이름을 입력하세요"><button class="action" onclick="saveName()">저장</button></div></div>
-</section>
+<section id="activity" class="screen">
+<button class="back" onclick="go('home')">← 음식마을로 돌아가기</button>
+<div class="card">
+<div class="bigfood" id="bigfood">🍎</div>
+<div class="question" id="question"></div>
+<div id="visual"></div>
+<div class="choices" id="choices"></div>
+<div class="feedback" id="feedback"></div>
+<div class="actionrow" id="actions"></div>
 </div>
-
-<div class="nav"><div class="navin"><button onclick="show('home')"><b>🏠</b>홈</button><button onclick="storyStart()"><b>🍽️</b>주방</button><button onclick="exploreStart()"><b>🔎</b>탐험</button><button onclick="show('collection');renderCollection()"><b>📕</b>도감</button></div></div>
-<div id="modal" class="modal"><div id="sheet" class="sheet"></div></div>
-
+</section>
+</main>
+</div>
 <script>
-/* V3의 핵심: 음식마다 '정확한 전용 그림'을 사용한다. 문제 음식과 다른 사물 그림을 섞지 않는다. */
-const SVG=(body,bg='#fff9df')=>`data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><rect width="120" height="120" rx="24" fill="${bg}"/>${body}</svg>`)}`;
-const ART={
- apple:SVG(`<path d="M61 34c-2-10 4-17 12-21" stroke="#5a8f3d" stroke-width="5" fill="none"/><ellipse cx="69" cy="17" rx="13" ry="6" fill="#74b84a"/><path d="M60 38c-24-16-43 4-37 30 5 23 20 37 37 37s32-14 37-37c6-26-13-46-37-30z" fill="#e84d42"/><path d="M44 43c-7 9-9 20-6 30" stroke="#ff9d8e" stroke-width="4" fill="none"/>`),
- strawberry:SVG(`<path d="M60 34c-24-18-40-2-37 18 3 25 19 45 37 45s34-20 37-45c3-20-13-36-37-18z" fill="#ef4d55"/><path d="M60 38c-13-14-24-10-29-4 10 1 18 5 29 14 11-9 19-13 29-14-5-6-16-10-29 4z" fill="#58a64b"/>${[45,60,75].map(x=>`<circle cx="${x}" cy="58" r="2.8" fill="#ffe9a8"/>`).join('')}${[40,55,70,85].map(x=>`<circle cx="${x}" cy="73" r="2.5" fill="#ffe9a8"/>`).join('')}`),
- banana:SVG(`<path d="M29 34c18 43 43 57 69 30-12 25-37 35-58 20C23 73 20 51 29 34z" fill="#f5cf45" stroke="#d7a62b" stroke-width="3"/><path d="M31 35l7-6M95 63l6 2" stroke="#6b5831" stroke-width="6" stroke-linecap="round"/>`),
- riceball:SVG(`<path d="M35 54h50l-7 42H42z" fill="#fff" stroke="#bbb" stroke-width="3"/><path d="M35 54c3-16 13-25 25-25s22 9 25 25" fill="#fff" stroke="#bbb" stroke-width="3"/><path d="M42 72h36v22H42z" fill="#222"/><path d="M48 76h24v4H48z" fill="#333"/>`),
- pizza:SVG(`<path d="M25 26l70 68c-24 10-48 2-61-16-12-17-14-35-9-52z" fill="#f6c45d" stroke="#d69a35" stroke-width="3"/><path d="M32 31l57 57" stroke="#e85a45" stroke-width="11"/><circle cx="52" cy="49" r="6" fill="#d9473d"/><circle cx="68" cy="65" r="6" fill="#d9473d"/><circle cx="78" cy="78" r="6" fill="#d9473d"/>`),
- burger:SVG(`<rect x="24" y="33" width="72" height="28" rx="22" fill="#d99a4e"/><rect x="29" y="58" width="62" height="10" rx="4" fill="#62a64d"/><rect x="27" y="68" width="66" height="14" rx="5" fill="#7b4b2e"/><rect x="29" y="82" width="62" height="12" rx="5" fill="#e0a451"/><circle cx="45" cy="43" r="2" fill="#fff3c1"/><circle cx="60" cy="40" r="2" fill="#fff3c1"/><circle cx="75" cy="45" r="2" fill="#fff3c1"/>`),
- cookie:SVG(`<circle cx="60" cy="60" r="38" fill="#d79a55" stroke="#a86e37" stroke-width="3"/><g fill="#704225"><circle cx="45" cy="48" r="5"/><circle cx="70" cy="45" r="5"/><circle cx="78" cy="67" r="5"/><circle cx="54" cy="75" r="5"/></g>`),
- cake:SVG(`<path d="M27 55h66v39H27z" fill="#f6b4c2" stroke="#d77d91" stroke-width="3"/><path d="M27 55c10 9 18-5 29 3 12 8 18-7 37-3v13c-15-5-24 8-36 0-13-9-20 5-30-2z" fill="#fff"/><path d="M57 39v16M52 39h10" stroke="#e7a83f" stroke-width="5" stroke-linecap="round"/><path d="M57 34c-7 0-6-8 0-10 6 2 7 10 0 10z" fill="#f1a53c"/>`),
- icecream:SVG(`<path d="M42 58h36l-10 43H52z" fill="#d9a35c" stroke="#b97d3c" stroke-width="3"/><path d="M36 57c0-23 17-34 24-34s24 11 24 34z" fill="#f4a9c2"/><path d="M45 48c8-8 20-7 29 0" stroke="#fff" stroke-width="5" fill="none"/>`),
- ramen:SVG(`<path d="M27 57h66v19c0 13-10 22-33 22S27 89 27 76z" fill="#e6b84f" stroke="#b88329" stroke-width="3"/><path d="M35 60c4 18 8-7 12 10s8-18 12 0 8-18 12 0 8-18 12 0" stroke="#f3d36b" stroke-width="4" fill="none"/><path d="M42 50c10-12 29-12 39 0" stroke="#6b3b2a" stroke-width="7" fill="none"/>`),
- sushi:SVG(`<path d="M29 52h62v35H29z" fill="#fff" stroke="#bbb" stroke-width="3"/><path d="M29 52h62l-9-16H38z" fill="#f08c65"/><rect x="30" y="71" width="60" height="13" fill="#222"/>`),
- dumpling:SVG(`<path d="M28 68c5-25 18-38 32-38s27 13 32 38c-18 18-46 18-64 0z" fill="#f3d19b" stroke="#c99f63" stroke-width="3"/><path d="M42 49c4 7 8 7 12 0 4 7 8 7 12 0 4 7 8 7 12 0" stroke="#c99f63" stroke-width="4" fill="none"/>`),
- tteokbokki:SVG(`<ellipse cx="60" cy="80" rx="38" ry="16" fill="#d94a3e"/><path d="M30 63c4-22 56-22 60 0v17H30z" fill="#ef6b4c" stroke="#bf3c32" stroke-width="3"/><g fill="#fff2d8"><rect x="38" y="51" width="12" height="25" rx="6"/><rect x="56" y="47" width="12" height="29" rx="6"/><rect x="74" y="53" width="12" height="23" rx="6"/></g><path d="M31 65h58" stroke="#a92f2b" stroke-width="5"/>`),
- kimbap:SVG(`<rect x="28" y="34" width="64" height="58" rx="10" fill="#222"/><rect x="38" y="44" width="44" height="38" fill="#fff"/><circle cx="50" cy="55" r="7" fill="#f3c34f"/><rect x="60" y="48" width="8" height="26" fill="#ef6b5c"/><rect x="71" y="55" width="7" height="17" fill="#66a65b"/>`),
- grape:SVG(`<path d="M60 31c-10-10-2-20 10-17" stroke="#5a8f3d" stroke-width="5" fill="none"/><g fill="#7952b8">${[[48,50],[64,48],[80,55],[40,66],[56,65],[72,70],[88,68],[48,82],[64,86],[80,83]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="10"/>`).join('')}</g>`)
-};
-
-const BASE=[
-{id:'apple',name:'사과',cat:'과일',desc:'사과나무에서 열리는 과일이에요. 아삭하고 달콤한 맛이 나요.',tip:'껍질째 먹기도 하고 잘라서 먹기도 해요.'},
-{id:'strawberry',name:'딸기',cat:'과일',desc:'작고 빨간 열매가 열리는 과일이에요. 달콤하고 향긋해요.',tip:'겉에 작은 씨처럼 보이는 점들이 있어요.'},
-{id:'banana',name:'바나나',cat:'과일',desc:'노란 껍질을 벗겨 먹는 길쭉한 과일이에요.',tip:'껍질을 벗기면 부드럽고 달콤해요.'},
-{id:'grape',name:'포도',cat:'과일',desc:'작은 알맹이가 모여 송이를 이루는 과일이에요.',tip:'초록색, 보라색 등 여러 종류가 있어요.'},
-{id:'riceball',name:'주먹밥',cat:'밥',desc:'밥을 동그랗게 뭉쳐 만든 음식이에요. 김을 둘러 먹기도 해요.',tip:'안에 참치, 멸치, 김치 등을 넣기도 해요.'},
-{id:'pizza',name:'피자',cat:'간식',desc:'도우 위에 치즈와 여러 재료를 올려 구운 음식이에요.',tip:'여러 조각으로 나누어 함께 먹기 좋아요.'},
-{id:'burger',name:'햄버거',cat:'식사',desc:'빵 사이에 고기와 채소 등을 넣어 먹는 음식이에요.',tip:'재료를 층층이 살펴보면 재미있어요.'},
-{id:'cookie',name:'쿠키',cat:'간식',desc:'밀가루와 여러 재료를 반죽해 구운 달콤한 간식이에요.',tip:'초콜릿이나 견과류를 넣기도 해요.'},
-{id:'cake',name:'케이크',cat:'간식',desc:'밀가루 반죽을 구워 크림이나 과일 등을 올린 음식이에요.',tip:'생일이나 특별한 날에 자주 먹어요.'},
-{id:'icecream',name:'아이스크림',cat:'간식',desc:'차갑게 얼려 먹는 달콤한 디저트예요.',tip:'녹기 전에 천천히 먹어야 해요.'},
-{id:'ramen',name:'라면',cat:'면',desc:'면을 국물과 함께 끓여 먹는 음식이에요.',tip:'뜨거울 수 있으니 조심해서 먹어요.'},
-{id:'sushi',name:'초밥',cat:'밥',desc:'식초로 간한 밥에 여러 재료를 올려 만든 음식이에요.',tip:'재료에 따라 모양과 맛이 달라져요.'},
-{id:'dumpling',name:'만두',cat:'간식',desc:'만두피 안에 고기나 채소 등을 넣어 익혀 먹는 음식이에요.',tip:'찐만두, 군만두, 만둣국처럼 여러 방법으로 먹어요.'},
-{id:'tteokbokki',name:'떡볶이',cat:'분식',desc:'떡과 어묵 등을 양념에 넣어 끓여 먹는 음식이에요.',tip:'맵지 않은 떡볶이도 만들 수 있어요.'},
-{id:'kimbap',name:'김밥',cat:'분식',desc:'밥과 여러 재료를 김으로 돌돌 말아 먹는 음식이에요.',tip:'잘라 놓으면 여러 조각으로 나누어 먹을 수 있어요.'}
+const foods=[
+ {name:"사과",e:"🍎",desc:"빨갛고 동그란 과일"},
+ {name:"딸기",e:"🍓",desc:"작고 달콤한 과일"},
+ {name:"바나나",e:"🍌",desc:"노랗고 길쭉한 과일"},
+ {name:"피자",e:"🍕",desc:"여러 사람이 함께 먹기 좋은 음식"},
+ {name:"쿠키",e:"🍪",desc:"바삭하고 달콤한 간식"},
+ {name:"김밥",e:"🍙",desc:"밥과 여러 재료를 돌돌 말아 만든 음식"},
+ {name:"떡볶이",e:"🍢",desc:"쫄깃한 떡으로 만든 음식"},
+ {name:"빵",e:"🥐",desc:"고소한 냄새가 나는 빵"}
 ];
-const DEFAULT={version:3,name:'',stars:0,solved:0,correct:0,unlocked:['apple','strawberry','banana'],custom:[],skills:{count:0,ten:0,add:0,carry:0,sub:0,borrow:0}};
-let state=load(),currentExplore=null,currentStory=null,activeCat='전체';
-function clone(x){return JSON.parse(JSON.stringify(x))}
-function load(){try{let x=JSON.parse(localStorage.getItem('mathFoodV3'));return x?Object.assign(clone(DEFAULT),x):clone(DEFAULT)}catch(e){return clone(DEFAULT)}}
-function save(){localStorage.setItem('mathFoodV3',JSON.stringify(state));homeUI()}
-function allFoods(){return BASE.concat(state.custom)}
-function getFood(id){return allFoods().find(f=>f.id===id)}
-function art(id,cls='foodart'){return `<img class="${cls}" src="${ART[id]||ART.apple}" alt="">`}
-function homeUI(){document.getElementById('hello').textContent=state.name?`${state.name}의 음식 주방`:'발견하고, 모으고, 요리해요';document.getElementById('stars').textContent=state.stars;document.getElementById('solved').textContent=state.solved;document.getElementById('earned').textContent=state.unlocked.length;document.getElementById('countText').textContent=`${state.unlocked.length+state.custom.length}개의 음식이 모였어요`}
-function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='home')homeUI()}
-function reward(){let locked=BASE.filter(f=>!state.unlocked.includes(f.id));let f=locked.length?locked[Math.floor(Math.random()*locked.length)]:BASE[Math.floor(Math.random()*BASE.length)];if(f&&!state.unlocked.includes(f.id))state.unlocked.push(f.id);state.stars++;return f}
-function diffFood(ex){let a=BASE.filter(f=>f.id!==ex);return a[Math.floor(Math.random()*a.length)]}
-
-/* 탐험: 같은 음식의 정확한 전용 그림만 선택 가능. */
-function exploreStart(){
-show('explore');
-let target=BASE[Math.floor(Math.random()*BASE.length)],count=3+Math.floor(Math.random()*7),cells=[];
-for(let i=0;i<count;i++)cells.push({id:target.id,selected:false});
-while(cells.length<10){let f=diffFood(target.id);cells.push({id:f.id,selected:false})}
-cells.sort(()=>Math.random()-.5);currentExplore={target,count,cells};
-document.getElementById('exploreTitle').innerHTML=`<span class="pill">오늘의 탐험</span><div class="speech">🍽️ 손님이 <b>${target.name}</b>을 찾고 있어요.<br><b>${target.name}만 골라서</b> 바구니에 담아 주세요!</div>`;
-renderExplore();
+let state=JSON.parse(localStorage.getItem("foodMathV1")||'{"played":0,"foods":[],"ten":0}');
+let current=null;
+function save(){localStorage.setItem("foodMathV1",JSON.stringify(state));render()}
+function render(){
+ document.getElementById("played").textContent=state.played;
+ document.getElementById("foods").textContent=state.foods.length;
+ document.getElementById("ten").textContent=state.ten;
+ const c=document.getElementById("collection");
+ c.innerHTML=(state.foods.length?state.foods:foods.slice(0,4).map(x=>x.name)).map(n=>{let f=foods.find(x=>x.name===n)||foods[0];return `<div class="food"><div class="pic">${f.e}</div><b>${f.name}</b></div>`}).join("");
 }
-function renderExplore(){
-let x=currentExplore;
-document.getElementById('exploreBoard').innerHTML=`<div class="grid5">${x.cells.map((c,i)=>`<button class="cell ${c.selected?'selected':''}" onclick="selectExplore(${i})">${art(c.id)}</button>`).join('')}</div>`;
-let chosen=x.cells.filter(c=>c.selected);
-document.getElementById('basketBoard').innerHTML=`<div class="basketTitle">🧺 내가 담은 ${x.target.name}</div><div class="grid5">${Array.from({length:10},(_,i)=>`<div class="cell">${chosen[i]?art(chosen[i].id):'<span class="empty">빈칸</span>'}</div>`).join('')}</div>`;
-if(x.cells.every(c=>c.selected)){document.getElementById('exploreAnswers').innerHTML=`<div class="instructions"><b>바구니에 몇 개가 담겼을까요?</b><br>하나씩 세어 보고 숫자를 골라 주세요.</div><div class="answerGrid">${[x.count-1,x.count,x.count+1,x.count+2].filter(n=>n>0&&n<=10).sort(()=>Math.random()-.5).map(n=>`<button class="answer" onclick="exploreAnswer(this,${n})">${n}</button>`).join('')}</div>`}
-else document.getElementById('exploreAnswers').innerHTML='';
+function go(id){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");window.scrollTo(0,0)}
+function start(type){
+ state.played++; save(); current={type};
+ let f=foods[Math.floor(Math.random()*foods.length)];
+ if(type==="pizza") pizza(f); else if(type==="bakery") bakery(f); else if(type==="kitchen") kitchen(f); else market(f);
+ go("activity");
 }
-function selectExplore(i){let x=currentExplore;if(x.cells[i].id!==x.target.id)return;x.cells[i].selected=!x.cells[i].selected;renderExplore()}
-function exploreAnswer(btn,n){let x=currentExplore;document.querySelectorAll('#exploreAnswers .answer').forEach(b=>b.classList.remove('selected','correct','wrong'));btn.classList.add('selected');state.solved++;if(n===x.count){btn.classList.add('correct');state.correct++;state.skills.count++;let f=reward();save();document.getElementById('exploreMsg').innerHTML=`<div class="success">🎉 맞아요! <b>${n}개</b>였어요.<div class="reward">🎁 ${f.name}을 새로 발견했어요!</div></div>`;document.getElementById('exploreAnswers').innerHTML='';setTimeout(exploreStart,1600)}else{btn.classList.add('wrong');document.getElementById('exploreMsg').innerHTML=`<div class="retry">🙂 다시 바구니를 천천히 세어 볼까요?<br>힌트: <b>5개씩</b> 줄을 나누어 보면 더 쉬워요.</div>`;save()}}
-
-/* 스토리형 미션: '수학놀이터'라는 이름을 전면에서 숨기고 음식 행동 안에 수 개념을 넣는다. */
-function storyStart(){show('story');nextStory()}
-function nextStory(){
-let r=Math.random(),q;
-if(r<.25){let a=6+Math.floor(Math.random()*4);q={type:'ten',title:'🥟 만두 포장하기',story:`손님이 만두를 <b>10개 한 상자</b>로 포장해 달라고 했어요.<br>지금 상자에는 <b>${a}개</b>가 들어 있어요. 몇 개를 더 넣으면 딱 10개가 될까요?`,a,b:10-a,ans:10-a,food:'dumpling',options:10-a};}
-else if(r<.58){let a=2+Math.floor(Math.random()*7),b=2+Math.floor(Math.random()*7);q={type:a+b>=10?'carry':'add',title:'🍕 피자 주문 준비',story:`손님 테이블에 피자 조각이 <b>${a}개</b> 놓였어요.<br>주방에서 <b>${b}개</b>를 더 가져왔어요.<br>테이블에는 모두 몇 개가 있을까요?`,a,b,ans:a+b,food:'pizza'};}
-else {let a=11+Math.floor(Math.random()*9),b=2+Math.floor(Math.random()*7);if(b>=a)b=a-1;q={type:(a%10)<b?'borrow':'sub',title:'🍪 쿠키 나누기',story:`쿠키가 <b>${a}개</b> 준비되어 있어요.<br>손님에게 <b>${b}개</b>를 먼저 드렸어요.<br>주방에는 몇 개가 남았을까요?`,a,b,ans:a-b,food:'cookie'};}
-currentStory=q;renderStory();
+function setBase(f,q){bigfood.textContent=f.e;question.textContent=q;visual.innerHTML="";choices.innerHTML="";feedback.textContent="";actions.innerHTML=""}
+function addChoice(txt,fn){let b=document.createElement("button");b.className="choice";b.textContent=txt;b.onclick=fn;choices.appendChild(b)}
+function market(f){
+ let a=3+Math.floor(Math.random()*5), b=2+Math.floor(Math.random()*4), total=a+b;
+ setBase(f,`바구니에 ${a}개 담았어요. ${b}개를 더 담으면 모두 몇 개일까요?`);
+ visual.innerHTML=`<div class="objects">${Array(a+b).fill(0).map((_,i)=>`<span class="obj">${f.e}</span>`).join("")}</div><div class="note">먼저 담은 것과 새로 담은 것을 눈으로 살펴보세요.</div>`;
+ [total,total-1,total+1,Math.max(1,total-2)].sort(()=>Math.random()-.5).forEach(n=>addChoice(n+"개",()=>answer(n===total,`바구니에 모두 ${total}개가 되었어요!`)));
 }
-function array10(n,id){return `<div class="grid5">${Array.from({length:10},(_,i)=>`<div class="cell">${i<n?art(id):''}</div>`).join('')}</div>`}
-function arrayN(n,id){let out='';for(let s=0;s<n;s+=10)out+=array10(Math.min(10,n-s),id);return out}
-function storyVisual(q){
-if(q.type==='ten')return `${array10(q.a,q.food)}<div class="instructions">빈칸을 채워서 한 줄에 10개를 완성해 보세요.</div>`;
-if(q.type==='add'){let total=q.a+q.b;return `<div class="story" style="text-align:center">${q.a}개 + ${q.b}개</div><div class="board">${arrayN(q.a,q.food)}<div style="text-align:center;font-size:28px">＋</div>${arrayN(q.b,q.food)}</div>${total>=10?`<div class="instructions">10개가 모이면 한 묶음으로 생각할 수 있어요.</div>`:''}`}
-let ones=q.a%10,tens=Math.floor(q.a/10);return `<div class="board"><div style="font-weight:900;margin-bottom:8px">전체 ${q.a}개</div>${tens?`<div class="pill">🔟 ${tens}묶음</div>`:''}${array10(ones,q.food)}</div>${ones<q.b?`<div class="instructions">일의 자리에 ${ones}개밖에 없어서 10개 묶음 하나를 실제 음식 10개로 풀어야 해요.</div><div class="board">${array10(10,q.food)}</div>`:''}<div class="small" style="text-align:center">빼야 하는 수: ${q.b}개</div>`}
-function choices(ans){let s=new Set([ans]);while(s.size<4){let d=[-2,-1,1,2,3][Math.floor(Math.random()*5)],n=ans+d;if(n>=0)s.add(n)}return [...s].sort(()=>Math.random()-.5)}
-function renderStory(){
-let q=currentStory;document.getElementById('storyHeading').textContent=q.title;document.getElementById('storyBody').innerHTML=`<div class="speech">${q.story}</div>`;document.getElementById('storyBoard').innerHTML=storyVisual(q);document.getElementById('storyAnswers').innerHTML=`<div class="instructions">👀 음식 그림을 보고 생각한 다음 답을 골라 주세요.</div><div class="answerGrid">${choices(q.ans).map(n=>`<button class="answer" onclick="storyAnswer(this,${n})">${n}</button>`).join('')}</div>`;document.getElementById('storyMsg').innerHTML=''}
-function storyAnswer(btn,n){let q=currentStory;document.querySelectorAll('#storyAnswers .answer').forEach(b=>b.classList.remove('selected','correct','wrong'));btn.classList.add('selected');state.solved++;if(n===q.ans){btn.classList.add('correct');state.correct++;state.skills[q.type]++;let f=reward();save();document.getElementById('storyMsg').innerHTML=`<div class="success">🎉 주문 준비 성공!<br><div class="reward">🎁 ${f.name}을 발견했어요!</div></div>`;document.getElementById('storyAnswers').innerHTML='';setTimeout(nextStory,1600)}else{btn.classList.add('wrong');document.getElementById('storyMsg').innerHTML=`<div class="retry">🤔 괜찮아요. 음식이 몇 개인지 그림을 다시 살펴봐요.<br>다른 답을 골라 볼 수 있어요.</div>`;save()}}
-
-/* 도감 */
-function renderCollection(){
-let cats=['전체',...new Set(allFoods().map(f=>f.cat))];document.getElementById('foodFilters').innerHTML=cats.map(c=>`<button class="chip ${activeCat===c?'on':''}" onclick="activeCat='${c}';renderCollection()">${c}</button>`).join('');
-let list=[...state.unlocked.map(getFood).filter(Boolean),...state.custom];if(activeCat!=='전체')list=list.filter(f=>f.cat===activeCat);
-let locked=BASE.filter(f=>!state.unlocked.includes(f.id)&&(activeCat==='전체'||f.cat===activeCat));
-document.getElementById('foodGrid').innerHTML=list.map(foodCard).join('')+locked.map(f=>`<div class="foodcard locked"><div class="foodpic">${art(f.id)}</div><div class="foodct"><div class="foodname">새로운 음식</div><div class="fooddesc">주방 미션을 하며 발견해 보세요.</div></div></div>`).join('');
+function pizza(f){
+ let slices=8, take=3, remain=5;
+ setBase({e:"🍕"},`피자를 ${slices}조각으로 나눴어요. ${take}조각을 손님에게 주면 몇 조각이 남을까요?`);
+ visual.innerHTML=`<div class="objects">${Array(slices).fill(0).map((_,i)=>`<span class="obj">🍕</span>`).join("")}</div><div class="note">손님에게 줄 조각을 마음속으로 또는 손가락으로 옮겨보세요.</div>`;
+ [remain,4,6,7].sort(()=>Math.random()-.5).forEach(n=>addChoice(n+"조각",()=>answer(n===remain,`남은 피자는 ${remain}조각이에요.`)));
 }
-function foodCard(f){let custom=state.custom.some(x=>x.id===f.id);return `<button class="foodcard" style="text-align:left;padding:0;width:100%" onclick="foodDetail('${f.id}')"><div class="foodpic">${f.image?`<img src="${f.image}" alt="">`:art(f.id)}</div><div class="foodct"><div class="foodname">${f.name}</div><div class="pill">${custom?'내가 발견':'주방에서 발견'}</div><div class="fooddesc">${f.desc||'아직 설명이 없어요.'}</div></div></button>`}
-function foodDetail(id){let f=getFood(id);openModal(`<div style="text-align:center">${f.image?`<img src="${f.image}" style="width:100%;max-height:300px;object-fit:cover;border-radius:18px">`:art(f.id,'foodart') }</div><h2>${f.name}</h2><div class="pill">${f.cat}</div><div class="instructions"><b>🍴 어떤 음식일까요?</b><br>${f.desc||'설명이 없어요.'}<br><br><b>💡 알아두면 좋은 점</b><br>${f.tip||'내가 등록한 음식이에요.'}</div><button class="secondary" onclick="closeModal()">닫기</button>`)}
-
-/* 직접 사진/그림 등록 */
-function newFood(){openModal(`<h2>📸 새로운 음식 발견</h2><p>먹어 본 음식이나 새로 발견한 음식을 내 도감에 넣어 보세요.</p><div class="field"><label>음식 이름</label><input id="nfName" placeholder="예: 떡볶이"></div><div class="field"><label>간단한 설명</label><textarea id="nfDesc" placeholder="예: 떡과 어묵을 양념에 넣어 먹는 음식이에요."></textarea></div><div class="field"><label>사진 선택 / 촬영</label><input id="nfPhoto" type="file" accept="image/*" capture="environment"></div><div class="field"><label>또는 직접 그리기</label><canvas id="drawCanvas" width="900" height="520"></canvas></div><div class="row"><button class="secondary" onclick="clearDraw()">지우기</button><button class="action" onclick="saveNewFood()">도감에 등록</button><button class="secondary" onclick="closeModal()">취소</button></div>`);setupDraw()}
-let drawCtx,drawing=false;function setupDraw(){let c=document.getElementById('drawCanvas');drawCtx=c.getContext('2d');drawCtx.lineWidth=12;drawCtx.lineCap='round';drawCtx.lineJoin='round';drawCtx.strokeStyle='#202124';c.onpointerdown=e=>{drawing=true;let p=pos(c,e);drawCtx.beginPath();drawCtx.moveTo(p.x,p.y)};c.onpointermove=e=>{if(!drawing)return;let p=pos(c,e);drawCtx.lineTo(p.x,p.y);drawCtx.stroke()};c.onpointerup=()=>drawing=false;c.onpointerleave=()=>drawing=false}
-function pos(c,e){let r=c.getBoundingClientRect();return{x:(e.clientX-r.left)*c.width/r.width,y:(e.clientY-r.top)*c.height/r.height}}function clearDraw(){drawCtx.clearRect(0,0,900,520)}
-function compress(file,max=720,q=.72){return new Promise((resolve,reject)=>{let r=new FileReader(),im=new Image();r.onload=()=>{im.onload=()=>{let sc=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=Math.round(im.width*sc);c.height=Math.round(im.height*sc);c.getContext('2d').drawImage(im,0,0,c.width,c.height);resolve(c.toDataURL('image/jpeg',q))};im.src=r.result};r.onerror=reject;r.readAsDataURL(file)})}
-async function saveNewFood(){let name=document.getElementById('nfName').value.trim();if(!name){alert('음식 이름을 입력해 주세요.');return}let desc=document.getElementById('nfDesc').value.trim()||'내가 직접 발견하고 등록한 음식이에요.';let file=document.getElementById('nfPhoto').files[0],image='';if(file)image=await compress(file);else{let c=document.createElement('canvas');c.width=450;c.height=260;c.getContext('2d').drawImage(document.getElementById('drawCanvas'),0,0,450,260);image=c.toDataURL('image/jpeg',.72)}state.custom.push({id:'custom_'+Date.now(),name,cat:'내 음식',desc,tip:'내가 사진을 찍거나 직접 그려서 등록했어요.',image});save();closeModal();activeCat='전체';show('collection');renderCollection()}
-function openModal(x){document.getElementById('sheet').innerHTML=x;document.getElementById('modal').classList.add('show')}function closeModal(){document.getElementById('modal').classList.remove('show')}
-
-/* 부모님 모드 */
-function parentGate(){openModal(`<h2>🔐 부모님 모드</h2><p>기본 PIN은 <b>1234</b>입니다.</p><input id="pin" type="password" inputmode="numeric" placeholder="PIN 4자리"><div class="row" style="margin-top:12px"><button class="action" onclick="checkPin()">확인</button><button class="secondary" onclick="closeModal()">취소</button></div>`)}
-function checkPin(){if(document.getElementById('pin').value==='1234'){closeModal();renderParent();show('parent')}else alert('PIN이 맞지 않습니다.')}
-function renderParent(){document.getElementById('pSolved').textContent=state.solved;document.getElementById('pCorrect').textContent=state.correct;document.getElementById('pAcc').textContent=state.solved?Math.round(state.correct/state.solved*100)+'%':'0%';let labels={count:'수 세기',ten:'10 만들기',add:'더하기',carry:'10을 넘어 모으기',sub:'빼기',borrow:'10을 풀어 빼기'};document.getElementById('skills').innerHTML=Object.entries(state.skills).map(([k,v])=>`<p><b>${labels[k]}</b> — ${v}회 경험</p>`).join('');document.getElementById('nameInput').value=state.name}
-function saveName(){state.name=document.getElementById('nameInput').value.trim();save();alert('저장했습니다.')}
-function backup(){let payload={app:'음식탐험 수학놀이터',version:3,createdAt:new Date().toISOString(),state};let blob=new Blob([JSON.stringify(payload)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='음식탐험_수학놀이터_V3_전체백업.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
-function restore(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!x.state)throw 0;state=x.state;save();alert('전체 데이터를 복원했습니다.');renderCollection();show('home')}catch(err){alert('백업 파일을 읽을 수 없습니다.')}};r.readAsText(f)}
-homeUI();
+function bakery(f){
+ let n=12; let boxes=Math.floor(n/5), rem=n%5;
+ setBase({e:"🥐"},`빵이 12개 있어요. 5개씩 상자에 담아보면 어떻게 될까요?`);
+ visual.innerHTML=`<div class="trays"><div class="tray"><div class="mini">${"🥐".repeat(5)}</div><b>한 상자</b></div><div class="tray"><div class="mini">${"🥐".repeat(5)}</div><b>한 상자</b></div><div class="tray"><div class="mini">🥐🥐</div><b>남은 빵</b></div></div><div class="note">같은 수만큼 묶으면 한눈에 보기 쉬워져요.</div>`;
+ [2,3,4,5].sort(()=>Math.random()-.5).forEach(x=>addChoice(x+"묶음",()=>answer(x===boxes,`5개씩 묶은 상자가 ${boxes}개이고, 2개가 남았어요.`)));
+}
+function kitchen(f){
+ let a=8,b=5,total=13;
+ setBase({e:"🍳"},`재료가 ${a}개 있었는데 ${b}개가 더 왔어요. 10개가 차면 큰 바구니를 열어볼까요?`);
+ visual.innerHTML=`<div class="trays"><div class="tray full"><div class="mini">${f.e.repeat(10)}</div><b>가득 찬 바구니 1개</b></div><div class="tray"><div class="mini">${f.e.repeat(3)}</div><b>새 바구니에 3개</b></div></div><div class="note">10개가 모이면 '가득 찬 바구니 1개'로 바뀌고, 남은 것은 새 바구니에 담겨요.</div>`;
+ [13,12,14,15].sort(()=>Math.random()-.5).forEach(x=>addChoice(x+"개",()=>answer(x===total,`가득 찬 바구니 10개와 새 바구니 3개, 모두 ${total}개예요!`)));
+}
+function answer(ok,msg){
+ feedback.textContent=ok?"✨ "+msg:"💭 다시 음식들을 직접 세어볼까요?";
+ if(ok){state.ten += current.type==="kitchen"?1:0; const f=foods[Math.floor(Math.random()*foods.length)]; if(!state.foods.includes(f.name))state.foods.push(f.name); save(); actions.innerHTML='<button class="action" onclick="start(current.type)">다른 이야기 해보기</button><button class="action secondary" onclick="go(\\'home\\')">마을 구경하기</button>'}
+ else actions.innerHTML='<button class="action secondary" onclick="feedback.textContent=\\'천천히 다시 살펴봐요 😊\\'">다시 살펴보기</button>';
+}
+render();
 </script>
 </body></html>
